@@ -12,6 +12,7 @@ const {
   Location,
   Order,
   OrderProduct,
+  Comments,
 } = require("../db");
 const { v4: uuidv4 } = require("uuid");
 const path = require("path");
@@ -21,6 +22,8 @@ const { type } = require("os");
 
 const DB_connect = async () => {
   try {
+    // Load data from JSON files
+
     const productFilePath = path.join(__dirname, "../../dataProducts.json");
     const productRawData = fs.readFileSync(productFilePath);
     const productData = JSON.parse(productRawData);
@@ -52,14 +55,16 @@ const DB_connect = async () => {
     const orderRawData = fs.readFileSync(orderFilePath);
     const orderData = JSON.parse(orderRawData);
 
+    const commentsFilePath = path.join(__dirname, "../../dataComments.json");
+    const commentsRawData = fs.readFileSync(commentsFilePath);
+    const commentsData = JSON.parse(commentsRawData);
+
     if (!productData.results || !categoryData) {
       console.log("No results found in the data.");
       return;
     }
 
-    const uniqueProducts = new Set();
-    const uniqueCategories = new Set();
-
+    // Create or find macro categories
     for (const macroCategoryItem of macroCategoryData) {
       const { id_agrupador, nombre } = macroCategoryItem;
       await MacroCategory.findOrCreate({
@@ -69,6 +74,9 @@ const DB_connect = async () => {
         },
       });
     }
+
+    // Create or find categories
+    const uniqueCategories = new Set();
     for (const categoryItem of categoryData) {
       const { id_categoria, nombre, id_agrupador } = categoryItem;
 
@@ -85,12 +93,13 @@ const DB_connect = async () => {
       }
     }
 
+    // Create or find products
+    const uniqueProducts = new Set();
     for (const item of productData.results) {
       const nombre = item.nombre;
-      //   console.log(typeof product.caracteristicas);
-      //   console.log(product.nombre, " ", product.caracteristicas);
       let specs = new Array();
       let specsValues = new Array();
+
       if (item.caracteristicas) {
         for (const caracteristica in item.caracteristicas) {
           const [newSpec, created] = await Specification.findOrCreate({
@@ -98,8 +107,9 @@ const DB_connect = async () => {
               name: caracteristica,
             },
           });
-          // console.log(newSpec.id_specification);
+
           specs.push(newSpec.id_specification);
+
           const [newSpecValue, valueCreated] =
             await SpecificationValue.findOrCreate({
               where: {
@@ -107,14 +117,15 @@ const DB_connect = async () => {
                 value: item.caracteristicas[caracteristica].toString(),
               },
             });
+
           specsValues.push(newSpecValue.id);
         }
       }
+
       if (!uniqueProducts.has(nombre)) {
         uniqueProducts.add(nombre);
         const id_categoria = item.id_categoria;
         const productData = {
-          // id_producto: item.id_producto,
           nombre: item.nombre,
           calificacion: item.destacado || null,
           precio: item.precio || null,
@@ -129,19 +140,21 @@ const DB_connect = async () => {
           where: { nombre },
           defaults: productData,
         });
+
         await Categories.findOne({ where: { id_categoria } }).then(
           (category) => {
             category.addSpecification(specs);
           }
         );
+
         for (const image of item.imagenes) {
-          //*Lógica para crear registro de imagenes
           const imageData = {
             url: image.ruta,
             id_product: product.id_producto,
           };
           await Images.create(imageData);
         }
+
         if (created) {
           await product.addSpecificationValues(specsValues);
         }
@@ -173,6 +186,7 @@ const DB_connect = async () => {
       });
     }
 
+    // Create or find roles and users
     for (const usersItem of usersData) {
       const { role } = usersItem.role;
       const [newRole, roleCreated] = await Role.findOrCreate({
@@ -198,17 +212,15 @@ const DB_connect = async () => {
           phoneNumber,
           id_role: newRole.id,
           id_location,
-          // id_order: newOrder,
         },
       });
+
       if (created) {
         await newUser.setLocation(id_location);
       }
     }
 
-    // console.log(locationData);
-
-    // console.log(orderData);
+    // Create or find orders
     for (const orderItem of orderData) {
       let price = 0;
       const { id_order, status, package, id_user } = orderItem;
@@ -254,22 +266,22 @@ const DB_connect = async () => {
         console.error(`Error inserting order ${id_order}:`, error);
       }
     }
+    for (const commentsItem of commentsData) {
+      const { id_comment, description, id_producto, id_user } = commentsItem;
 
-    await Users.sync();
-    await Products.sync();
-    await Categories.sync();
-    await Seccion.sync();
-    await MacroCategory.sync();
-    await Specification.sync();
-    await SpecificationValue.sync();
-    await Images.sync();
-    await Location.sync();
-    // await Order.sync();
-    await Favoritos.sync();
+      const [createdComment, created] = await Comments.findOrCreate({
+        where: { id_comment },
+        defaults: {
+          description,
+          id_user,
+          id_producto,
+        },
+      });
+    }
 
     console.log("♥ Database Created... ♥");
   } catch (error) {
-    console.log("An error occurred:", error);
+    console.error("Error populating the database:", error);
   }
 };
 

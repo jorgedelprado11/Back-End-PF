@@ -9,6 +9,7 @@ const specificationRouter = require("./Specifications/SpecificationRouter");
 const locationRouter = require("./Location/LocationRouter");
 const orderRouter = require("./Order/OrderRouter");
 const verifyToken = require("../Assessments/verifyToken");
+const commentsRouter = require("./Comments/CommentsRouter");
 
 const router = express.Router();
 
@@ -21,6 +22,7 @@ router.use("/favoritos", verifyToken, favoritosRouter);
 router.use("/specifications", specificationRouter);
 router.use("/location", verifyToken, locationRouter);
 router.use("/order", orderRouter);
+router.use("/comments", commentsRouter);
 
 module.exports = router;
 
