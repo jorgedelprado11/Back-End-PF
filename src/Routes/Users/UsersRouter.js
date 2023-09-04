@@ -8,12 +8,14 @@ const createUser = require("../../Controllers/Users/createUser");
 const updateUser = require("../../Controllers/Users/updateUser");
 const deleteUser = require("../../Controllers/Users/deleteUser");
 const loginUser = require("../../Controllers/Users/loginUser");
+const verifyToken = require("../../Assessments/verifyToken");
+const verifyAdmin = require("../../Assessments/verifyAdmin");
 
-usersRouter.use("/login", loginUser); // ? OK
+usersRouter.post("/login", loginUser); // ? OK
 
-usersRouter.get("/", getAllUsers); // ? OK
+usersRouter.get("/", verifyAdmin, getAllUsers); // ? OK
 
-usersRouter.post("/", createUser); // ? OK
+usersRouter.post("/createUser", createUser); // ? OK
 
 usersRouter.get("/profile", getUserByUsername); // ? OK
 

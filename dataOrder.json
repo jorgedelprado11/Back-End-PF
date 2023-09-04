@@ -5,29 +5,30 @@
     "package": {
       "items": [
         {
-          "name": "Product 3",
-          "quantity": 4
+          "id_producto": "3",
+          "cantidad": 4
         },
         {
-          "name": "Product 4",
-          "quantity": 1
+          "id_producto": "4",
+          "cantidad": 1
         }
-      ],
-      "total_price": 75.0
-    }
+      ]
+    },
+    "id_user": 1
   },
   {
     "id_order": 2,
     "status": "Shipped",
+    "id_user": 2,
     "package": {
       "items": [
         {
-          "name": "Product 5",
-          "quantity": 2
+          "id_producto": "5",
+          "cantidad": 2
         },
         {
-          "name": "Product 6",
-          "quantity": 2
+          "id_producto": "6",
+          "cantidad": 2
         }
       ],
       "total_price": 50.0
@@ -36,11 +37,12 @@
   {
     "id_order": 3,
     "status": "Delivered",
+    "id_user": 3,
     "package": {
       "items": [
         {
-          "name": "Product 7",
-          "quantity": 1
+          "id_producto": "7",
+          "cantidad": 1
         }
       ],
       "total_price": 25.0
@@ -49,15 +51,16 @@
   {
     "id_order": 4,
     "status": "Pending",
+    "id_user": 5,
     "package": {
       "items": [
         {
-          "name": "Product 8",
-          "quantity": 3
+          "id_producto": "8",
+          "cantidad": 3
         },
         {
-          "name": "Product 9",
-          "quantity": 2
+          "id_producto": "9",
+          "cantidad": 2
         }
       ],
       "total_price": 90.0
@@ -66,11 +69,12 @@
   {
     "id_order": 5,
     "status": "Cancelled",
+    "id_user": 5,
     "package": {
       "items": [
         {
-          "name": "Product 10",
-          "quantity": 1
+          "id_producto": "10",
+          "cantidad": 1
         }
       ],
       "total_price": 10.0

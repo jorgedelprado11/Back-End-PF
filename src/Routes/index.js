@@ -8,6 +8,7 @@ const macroCategoryRouter = require("./MacroCategory/MacroCategoryRouter.js");
 const specificationRouter = require("./Specifications/SpecificationRouter");
 const locationRouter = require("./Location/LocationRouter");
 const orderRouter = require("./Order/OrderRouter");
+const verifyToken = require("../Assessments/verifyToken");
 
 const router = express.Router();
 
@@ -16,9 +17,9 @@ router.use("/productos", productsRouter);
 router.use("/categorias", categoriesRouter);
 router.use("/seccion", seccionRouter);
 router.use("/macroCategories", macroCategoryRouter);
-router.use("/favoritos", favoritosRouter);
+router.use("/favoritos", verifyToken, favoritosRouter);
 router.use("/specifications", specificationRouter);
-router.use("/location", locationRouter);
+router.use("/location", verifyToken, locationRouter);
 router.use("/order", orderRouter);
 
 module.exports = router;

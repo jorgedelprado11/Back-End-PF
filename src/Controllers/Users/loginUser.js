@@ -4,7 +4,10 @@ const { Users } = require("../../db");
 const loginUser = async (req, res) => {
   try {
     const userData = req.body;
-    const user = await Users.findOne({ where: userData });
+    const user = await Users.findOne({
+      where: userData,
+      attributes: ["username", "password", "id_role"],
+    });
     if (!user)
       res.status(403).json({ message: "Usuario o contraseña incorrectos" });
     const token = jsw.sign({ ...user }, process.env.SECRET_KEY, {

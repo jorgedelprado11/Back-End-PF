@@ -1,27 +1,26 @@
 const { DataTypes } = require("sequelize");
 const Crud = require("./Crud");
 
-class Order extends Crud {
+class OrderProduct extends Crud {
   constructor(sequelize) {
     super(
-      sequelize.define("Order", {
-        id_order: {
+      sequelize.define("OrderProduct", {
+        id_orderProduct: {
           type: DataTypes.INTEGER,
           primaryKey: true,
           allowNull: false,
           autoIncrement: true,
         },
-        status: {
-          type: DataTypes.STRING,
-          allowNull: false,
-        },
         price: {
           type: DataTypes.FLOAT,
+          allowNull: false,
+        },
+        quantity: {
+          type: DataTypes.INTEGER,
           allowNull: false,
         },
       })
     );
   }
 }
-
-module.exports = Order;
+module.exports = OrderProduct;

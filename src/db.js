@@ -71,7 +71,6 @@ const {
   Role,
   Products,
   Categories,
-  Seccion,
   MacroCategory,
   Specification,
   SpecificationValue,
@@ -79,6 +78,7 @@ const {
   Favoritos,
   Location,
   Order,
+  OrderProduct,
 } = sequelize.models;
 
 Categories.hasMany(Products, { foreignKey: "id_categoria" });
@@ -106,6 +106,9 @@ SpecificationValue.belongsTo(Specification, {
 Products.belongsToMany(Users, { through: Favoritos });
 Favoritos.belongsTo(Products);
 
+Products.belongsToMany(Order, { through: OrderProduct });
+Order.belongsToMany(Products, { through: OrderProduct });
+
 Users.hasMany(Favoritos);
 Favoritos.belongsTo(Users);
 
@@ -129,8 +132,8 @@ Specification.belongsToMany(Categories, {
 Users.belongsTo(Location, { foreignKey: "id_location" });
 Location.hasOne(Users, { foreignKey: "id_location" });
 
-Order.hasMany(Users, { foreignKey: "id_order" });
-Users.belongsTo(Order, { foreignKey: "id_order" });
+Order.belongsTo(Users, { foreignKey: "id_user" });
+Users.hasOne(Order, { foreignKey: "id_user" });
 
 /*
 ! Exporto los modelos para que puedan ser utilizados en otros archivos de la aplicación */

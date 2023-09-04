@@ -11,11 +11,13 @@ const {
   Favoritos,
   Location,
   Order,
+  OrderProduct,
 } = require("../db");
 const { v4: uuidv4 } = require("uuid");
 const path = require("path");
 const fs = require("fs");
 const { where } = require("sequelize");
+const { type } = require("os");
 
 const DB_connect = async () => {
   try {
@@ -146,16 +148,16 @@ const DB_connect = async () => {
       }
     }
 
-    for (const seccionItem of seccionData) {
-      const { id_seccion, nombre } = seccionItem;
+    // for (const seccionItem of seccionData) {
+    //   const { id_seccion, nombre } = seccionItem;
 
-      await Seccion.findOrCreate({
-        where: { id_seccion },
-        defaults: {
-          nombre: nombre,
-        },
-      });
-    }
+    //   await Seccion.findOrCreate({
+    //     where: { id_seccion },
+    //     defaults: {
+    //       nombre: nombre,
+    //     },
+    //   });
+    // }
     for (const locationItem of locationData) {
       const { id_location, provincia, ciudad, calle, codigo_postal } =
         locationItem;
@@ -173,17 +175,11 @@ const DB_connect = async () => {
 
     for (const usersItem of usersData) {
       const { role } = usersItem.role;
-      // const { order } = usersItem.order;
-
       const [newRole, roleCreated] = await Role.findOrCreate({
         where: { description: role },
       });
 
-      // const [newOrder, orderCreated] = await Order.findOrCreate({
-      //   where: { id_order: order },
-      // });
       const {
-        // id,
         username,
         email,
         password,
@@ -214,16 +210,40 @@ const DB_connect = async () => {
 
     // console.log(orderData);
     for (const orderItem of orderData) {
-      const { id_order, status, package } = orderItem;
-
+      let price = 0;
+      const { id_order, status, package, id_user } = orderItem;
       try {
         const [createdOrder, created] = await Order.findOrCreate({
           where: { id_order },
           defaults: {
             status,
-            package,
+            price,
+            id_user,
           },
         });
+        if (created) {
+          for (const product of package.items) {
+            let { id_producto, cantidad } = product;
+            id_producto = Number(id_producto);
+            const productData = await Products.findOne({
+              where: { id_producto },
+            });
+            const [createdOrderProduct, created] =
+              await OrderProduct.findOrCreate({
+                where: {
+                  OrderIdOrder: id_order,
+                  ProductIdProducto: id_producto,
+                },
+                defaults: {
+                  price: productData.precio * cantidad,
+                  quantity: cantidad,
+                },
+              });
+            price = price + productData.precio * cantidad;
+          }
+          createdOrder.price = price;
+          await createdOrder.save();
+        }
 
         // if (created) {
         //   console.log(`Order ${id_order} created successfully.`);
