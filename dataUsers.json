@@ -8,7 +8,8 @@
     "lastName": "Doe",
     "phoneNumber": "123-456-7890",
     "id_location": 1,
-    "role": { "id": 1, "role": "admin" }
+    "role": { "id": 1, "role": "admin" },
+    "id_order": 1
   },
   {
     "id": 2,
@@ -19,7 +20,8 @@
     "lastName": "Smith",
     "phoneNumber": "987-654-3210",
     "id_location": 2,
-    "role": { "id": 1, "role": "user" }
+    "role": { "id": 1, "role": "user" },
+    "id_order": 2
   },
   {
     "id": 3,
@@ -30,7 +32,8 @@
     "lastName": "Johnson",
     "phoneNumber": "857-852-6589",
     "id_location": 3,
-    "role": { "id": 1, "role": "user" }
+    "role": { "id": 1, "role": "user" },
+    "id_order": 3
   },
   {
     "id": 4,
@@ -41,7 +44,8 @@
     "lastName": "Brown",
     "phoneNumber": "555-123-4567",
     "id_location": 4,
-    "role": { "id": 1, "role": "user" }
+    "role": { "id": 1, "role": "user" },
+    "id_order": 4
   },
   {
     "id": 5,
@@ -52,6 +56,7 @@
     "lastName": "Jones",
     "phoneNumber": "111-222-3333",
     "id_location": 5,
-    "role": { "id": 1, "role": "user" }
+    "role": { "id": 1, "role": "user" },
+    "id_order": 5
   }
 ]

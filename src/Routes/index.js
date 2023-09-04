@@ -8,6 +8,7 @@ const macroCategoryRouter = require("./MacroCategory/MacroCategoryRouter.js");
 const specificationRouter = require("./Specifications/SpecificationRouter");
 const locationRouter = require("./Location/LocationRouter");
 const orderRouter = require("./Order/OrderRouter");
+const commentsRouter = require("./Comments/CommentsRouter");
 
 const router = express.Router();
 
@@ -20,6 +21,7 @@ router.use("/favoritos", favoritosRouter);
 router.use("/specifications", specificationRouter);
 router.use("/location", locationRouter);
 router.use("/order", orderRouter);
+router.use("/comments", commentsRouter);
 
 module.exports = router;
 

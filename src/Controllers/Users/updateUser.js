@@ -5,7 +5,7 @@ const updateUser = async (req, res) => {
     const { id } = req.params;
     const { username, email, password, firstName, lastName, phoneNumber } =
       req.body;
-      
+
     const user = await Users.findOne({ where: { id } });
 
     if (!user) {

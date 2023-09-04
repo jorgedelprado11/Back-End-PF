@@ -20,18 +20,18 @@ const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME } = process.env;
 ? path __filename: la variable basename contendrá el nombre del archivo sin la ruta del directorio, es decir, solo el nombre del archivo en sí. Esto puede ser útil en escenarios donde necesitas referenciar el nombre del archivo actual sin la ruta completa*/
 
 //*mySQL
-const sequelize = new Sequelize(
-  `mysql://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`,
-  { logging: false, native: false, host: "localhost", dialect: "mysql" }
-);
-//*Postgress
 // const sequelize = new Sequelize(
-//   `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`,
-//   {
-//     logging: false,
-//     native: false,
-//   }
+//   `mysql://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`,
+//   { logging: false, native: false, host: "localhost", dialect: "mysql" }
 // );
+//*Postgress
+const sequelize = new Sequelize(
+  `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`,
+  {
+    logging: false,
+    native: false,
+  }
+);
 
 const basename = path.basename(__filename);
 
@@ -79,6 +79,7 @@ const {
   Favoritos,
   Location,
   Order,
+  Comments,
 } = sequelize.models;
 
 Categories.hasMany(Products, { foreignKey: "id_categoria" });
@@ -129,8 +130,14 @@ Specification.belongsToMany(Categories, {
 Users.belongsTo(Location, { foreignKey: "id_location" });
 Location.hasOne(Users, { foreignKey: "id_location" });
 
-Order.hasMany(Users, { foreignKey: "id_order" });
 Users.belongsTo(Order, { foreignKey: "id_order" });
+Order.hasOne(Users, { foreignKey: "id_order" });
+
+Users.hasMany(Comments, { foreignKey: "id_user" });
+Comments.belongsTo(Users, { foreignKey: "id_user" });
+
+Products.hasMany(Comments, { foreignKey: "id_producto" });
+Comments.belongsTo(Products, { foreignKey: "id_producto" });
 
 /*
 ! Exporto los modelos para que puedan ser utilizados en otros archivos de la aplicación */
