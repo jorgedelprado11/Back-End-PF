@@ -156,6 +156,20 @@ const DB_connect = async () => {
         },
       });
     }
+    for (const locationItem of locationData) {
+      const { id_location, provincia, ciudad, calle, codigo_postal } =
+        locationItem;
+
+      const [location, created] = await Location.findOrCreate({
+        where: { id_location },
+        defaults: {
+          provincia,
+          ciudad,
+          calle,
+          codigo_postal,
+        },
+      });
+    }
 
     for (const usersItem of usersData) {
       const { role } = usersItem.role;
@@ -176,6 +190,7 @@ const DB_connect = async () => {
         firstName,
         lastName,
         phoneNumber,
+        id_location,
       } = usersItem;
 
       const [newUser, created] = await Users.findOrCreate({
@@ -186,26 +201,16 @@ const DB_connect = async () => {
           lastName,
           phoneNumber,
           id_role: newRole.id,
+          id_location,
           // id_order: newOrder,
         },
       });
+      if (created) {
+        await newUser.setLocation(id_location);
+      }
     }
 
     // console.log(locationData);
-    for (const locationItem of locationData) {
-      const { id_location, provincia, ciudad, calle, codigo_postal } =
-        locationItem;
-
-      const [location, created] = await Location.findOrCreate({
-        where: { id_location },
-        defaults: {
-          provincia,
-          ciudad,
-          calle,
-          codigo_postal,
-        },
-      });
-    }
 
     // console.log(orderData);
     for (const orderItem of orderData) {
