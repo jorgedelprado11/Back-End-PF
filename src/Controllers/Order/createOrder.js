@@ -12,6 +12,8 @@ const createOrder = async (req, res) => {
 
 module.exports = createOrder;
 
+
+
 // const { Order, Users } = require("../../db");
 
 // const createOrder = async (req, res) => {
@@ -19,7 +21,7 @@ module.exports = createOrder;
 //     const { status,  price} = req.body;
 //     const { id_user } = req.params;
 
-//     if (!status || !id_user || !id_user) {
+//     if (!status || !price || !id_user) {
 //       return res.status(400).json({ message: "Missing required fields" });
 //     }
 

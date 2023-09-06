@@ -29,7 +29,9 @@ const updateLocation = async (req, res) => {
 
     await location.save();
 
-    return res.status(200).json({ message: "Ubicación actualizada correctamente", location });
+    return res
+      .status(200)
+      .json({ message: "Ubicación actualizada correctamente", location });
   } catch (error) {
     return res.status(400).send(error.message);
   }
