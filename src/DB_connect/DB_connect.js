@@ -233,6 +233,7 @@ const DB_connect = async () => {
             id_user,
           },
         });
+
         if (created) {
           for (const product of package.items) {
             let { id_producto, cantidad } = product;

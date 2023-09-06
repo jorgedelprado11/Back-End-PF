@@ -1,7 +1,8 @@
 [
   {
-    "id_order": 1,
+    "id_order": 6,
     "status": "Processing",
+    "id_user": 6,
     "package": {
       "items": [
         {
@@ -13,8 +14,7 @@
           "cantidad": 1
         }
       ]
-    },
-    "id_user": 1
+    }
   },
   {
     "id_order": 2,
@@ -51,7 +51,7 @@
   {
     "id_order": 4,
     "status": "Pending",
-    "id_user": 5,
+    "id_user": 4,
     "package": {
       "items": [
         {

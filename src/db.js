@@ -134,7 +134,7 @@ Users.belongsTo(Location, { foreignKey: "id_location" });
 Location.hasOne(Users, { foreignKey: "id_location" });
 
 Order.belongsTo(Order, { foreignKey: "id_user" });
-User.hasOne(Users, { foreignKey: "id_user" });
+Users.hasOne(Users, { foreignKey: "id_order" });
 
 Users.hasMany(Comments, { foreignKey: "id_user" });
 Comments.belongsTo(Users, { foreignKey: "id_user" });

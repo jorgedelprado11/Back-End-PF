@@ -20,7 +20,8 @@ router.use("/seccion", seccionRouter);
 router.use("/macroCategories", macroCategoryRouter);
 router.use("/favoritos", verifyToken, favoritosRouter);
 router.use("/specifications", specificationRouter);
-router.use("/location", verifyToken, locationRouter);
+// ! AGREGAR verifyToken
+router.use("/location", locationRouter);
 router.use("/order", orderRouter);
 router.use("/comments", commentsRouter);
 

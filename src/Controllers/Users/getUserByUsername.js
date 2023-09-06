@@ -2,7 +2,7 @@ const { Users } = require("../../db");
 
 const getUserByUsername = async (req, res) => {
   try {
-    const { username } = req.body;
+    const { username } = req.query;
     console.log(username);
 
     if (!username) {

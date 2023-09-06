@@ -8,8 +8,10 @@ const deleteOrder = require("../../Controllers/Order/deleteOrder");
 const verifyAdmin = require("../../Assessments/verifyAdmin");
 const verifyToken = require("../../Assessments/verifyToken");
 
-orderRouter.get("/", verifyAdmin, getAllOrder);
-orderRouter.get("/:id_order", verifyToken, getOrderById);
+// ! AGREGAR verifyToken
+orderRouter.get("/", getAllOrder);
+// ! AGREGAR verifyToken
+orderRouter.get("/:id_order", getOrderById);
 orderRouter.post("/", verifyToken, createOrder);
 orderRouter.put("/:id_order", verifyToken, updateOrder);
 orderRouter.delete("/:id_order", verifyToken, deleteOrder);
