@@ -33,7 +33,7 @@ const updateLocation = async (req, res) => {
       .status(200)
       .json({ message: "Ubicación actualizada correctamente", location });
   } catch (error) {
-    return res.status(400).send(error.message);
+    return res.status(400).json("Error simulado");
   }
 };
 

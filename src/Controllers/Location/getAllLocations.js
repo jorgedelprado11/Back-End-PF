@@ -15,10 +15,3 @@ const getAllLocations = async (req, res) => {
 };
 
 module.exports = getAllLocations;
-
-// const getAllLocations = async (req, res) => {
-//   // Simplemente respondemos con un estado HTTP 200
-//   return res.status(200);
-// };
-
-// module.exports = getAllLocations;

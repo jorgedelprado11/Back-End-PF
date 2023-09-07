@@ -1,5 +1,5 @@
-const getAllLocations = require("./getAllLocations");
-const { Location } = require("../../db");
+const getAllLocations = require("../getAllLocations");
+const { Location } = require("../../../db");
 
 const mockRequest = () => ({});
 const mockResponse = () => {
@@ -9,7 +9,7 @@ const mockResponse = () => {
   return res;
 };
 
-jest.mock("../../db", () => ({
+jest.mock("../../../db", () => ({
   Location: {
     findAll: jest.fn(),
   },
