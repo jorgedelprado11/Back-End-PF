@@ -15,7 +15,7 @@ const deleteOrder = async (req, res) => {
       message: `El pedido con ID ${orderToDelete.id_order} fue eliminado exitosamente.`,
     });
   } catch (error) {
-    return res.status(404).send(error.message);
+    return res.status(404).send(error);
   }
 };
 

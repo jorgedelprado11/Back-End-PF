@@ -17,7 +17,6 @@ const getLocationByProvincia = async (req, res) => {
       res.status(200).json(searchLocation);
     }
   } catch (error) {
-    console.log(error);
     return res
       .status(400)
       .json({ message: "Error occurred while searching for Location" });

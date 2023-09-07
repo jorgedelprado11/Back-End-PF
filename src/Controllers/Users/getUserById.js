@@ -1,18 +1,16 @@
-const { Users } = require("../../db");
+const { Users, Role } = require("../../db");
 
 const getUserById = async (req, res) => {
   try {
     const { id } = req.params;
-    console.log(id);
-
     if (!id) {
       return res.status(400).json({ message: "Missing required fields" });
     }
 
-    const user = await Users.findOne({ where: { id } });
-
-    console.log(user);
-
+    const user = await Users.findOne({
+      where: { id },
+      include: [{ model: Role, attributes: ["description"] }],
+    });
     if (!user) {
       return res.status(404).json({ user });
     }
