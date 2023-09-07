@@ -5,7 +5,7 @@ const getAllLocations = async (req, res) => {
     const locations = await Location.findAll();
 
     if (!locations || locations.length === 0) {
-      return res.status(500).json({ message: "Locations Not Found" });
+      return res.status(404).json({ message: "Locations Not Found" });
     }
 
     return res.status(200).json(locations);
