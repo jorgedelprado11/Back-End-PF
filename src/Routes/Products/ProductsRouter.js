@@ -16,18 +16,18 @@ productsRouter.get("/", (req, res) => {
   !nombre ? getAllProducts(req, res) : getProductByName(req, res);
 });
 
-productsRouter.get("/eliminados", verifyAdmin, getEliminatedProducts);
+productsRouter.get("/eliminados", getEliminatedProducts);
 
 productsRouter.get("/calificacion", getProductsByCalificacion);
 
 productsRouter.get("/:id_producto", getProductById);
 
-productsRouter.post("/", verifyAdmin, postProducts);
+productsRouter.post("/", postProducts);
 
-productsRouter.put("/:id_producto", verifyAdmin, updateProducts);
+productsRouter.put("/:id_producto", updateProducts);
 
-productsRouter.delete("/:id_producto", verifyAdmin, deleteProducts);
+productsRouter.delete("/:id_producto", deleteProducts);
 
-productsRouter.post("/:id_producto", verifyAdmin, restoreProducts);
+productsRouter.post("/:id_producto", restoreProducts);
 
 module.exports = productsRouter;

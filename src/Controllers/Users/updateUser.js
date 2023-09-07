@@ -3,8 +3,15 @@ const { Users } = require("../../db");
 const updateUser = async (req, res) => {
   try {
     const { id } = req.params;
-    const { username, email, password, firstName, lastName, phoneNumber } =
-      req.body;
+    const {
+      username,
+      email,
+      password,
+      firstName,
+      lastName,
+      phoneNumber,
+      id_role,
+    } = req.body;
 
     const user = await Users.findOne({ where: { id } });
 
@@ -27,9 +34,11 @@ const updateUser = async (req, res) => {
     if (lastName) {
       user.lastName = lastName;
     }
-
     if (phoneNumber) {
       user.phoneNumber = phoneNumber;
+    }
+    if (id_role) {
+      user.id_role = id_role;
     }
 
     await user.save();

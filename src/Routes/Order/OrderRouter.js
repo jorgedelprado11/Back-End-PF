@@ -12,8 +12,8 @@ const verifyToken = require("../../Assessments/verifyToken");
 orderRouter.get("/", getAllOrder);
 // ! AGREGAR verifyToken
 orderRouter.get("/:id_order", getOrderById);
-orderRouter.post("/", verifyToken, createOrder);
-orderRouter.put("/:id_order", verifyToken, updateOrder);
-orderRouter.delete("/:id_order", verifyToken, deleteOrder);
+orderRouter.post("/", createOrder);
+orderRouter.put("/:id_order", updateOrder);
+orderRouter.delete("/:id_order", deleteOrder);
 
 module.exports = orderRouter;
