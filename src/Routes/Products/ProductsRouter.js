@@ -9,6 +9,7 @@ const getProductsByCalificacion = require("../../Controllers/Products/getProduct
 const postProducts = require("../../Controllers/Products/postProducts");
 const restoreProducts = require("../../Controllers/Products/restoreProducts");
 const updateProducts = require("../../Controllers/Products/updateProducts");
+const verifyAdmin = require("../../Assessments/verifyAdmin");
 
 productsRouter.get("/", (req, res) => {
   const { nombre } = req.query;

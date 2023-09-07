@@ -3,7 +3,7 @@ const { Location, Users } = require("../../db");
 const getLocationOfOneUser = async (req, res) => {
   try {
     const { id } = req.params;
-    console.log(id);
+    // console.log(id);
     const user = await Users.findByPk(id);
 
     if (!user) throw Error("User Not Found");

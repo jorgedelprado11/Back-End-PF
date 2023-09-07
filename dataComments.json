@@ -1,0 +1,62 @@
+[
+  {
+    "id_comment": 2,
+    "description": "Este producto es increíble. Lo he estado usando durante meses y nunca me ha decepcionado. ¡Una compra sólida!",
+    "id_user": 1,
+    "id_producto": 203
+  },
+  {
+    "id_comment": 3,
+    "description": "La calidad de construcción de este producto es impresionante. Se siente robusto y duradero. Sin duda, vale la pena cada centavo.",
+    "id_user": 3,
+    "id_producto": 100
+  },
+  {
+    "id_comment": 4,
+    "description": "El rendimiento de este producto es excepcional. Puedo ejecutar aplicaciones exigentes sin problemas. Estoy muy satisfecho.",
+    "id_user": 4,
+    "id_producto": 100
+  },
+  {
+    "id_comment": 5,
+    "description": "No puedo creer lo rápido que se envió este producto. Lo ordené ayer y ya lo tengo en mis manos. Excelente servicio al cliente.",
+    "id_user": 5,
+    "id_producto": 20
+  },
+  {
+    "id_comment": 6,
+    "description": "He estado buscando un producto como este durante mucho tiempo, y finalmente lo encontré. Cumple con todas mis expectativas.",
+    "id_user": 3,
+    "id_producto": 142
+  },
+  {
+    "id_comment": 7,
+    "description": "El diseño de este producto es elegante y moderno. Se ve genial en mi escritorio. Definitivamente, una compra inteligente.",
+    "id_user": 1,
+    "id_producto": 30
+  },
+  {
+    "id_comment": 8,
+    "description": "La duración de la batería de este portátil es sorprendente. Puedo usarlo durante todo el día sin tener que preocuparme por cargarlo.",
+    "id_user": 3,
+    "id_producto": 15
+  },
+  {
+    "id_comment": 9,
+    "description": "El precio de este producto es justo teniendo en cuenta todas las características que ofrece. No puedo quejarme de nada.",
+    "id_user": 4,
+    "id_producto": 13
+  },
+  {
+    "id_comment": 10,
+    "description": "La pantalla de este producto es de alta resolución y los colores son vibrantes. Es perfecto para ver películas y jugar juegos.",
+    "id_user": 5,
+    "id_producto": 267
+  },
+  {
+    "id_comment": 11,
+    "description": "Recomendaría este producto a cualquiera que busque calidad y rendimiento. Estoy muy contento con mi compra.",
+    "id_user": 3,
+    "id_producto": 120
+  }
+]

@@ -1,21 +1,21 @@
-const { Order } = require("../../db");
+const { Order, OrderProduct, Products } = require("../../db");
 
 const updateOrder = async (req, res) => {
   try {
-    const { id_order } = req.params;
-    const { status, package } = req.body;
-    const order = await Order.findOne({ where: { id_order } });
+    const { id_producto, quantity, id_order } = req.body;
+    const product = await Products.findByPk(id_producto);
+    const [newOrder, created] = await OrderProduct.findOrCreate({
+      where: { OrderIdOrder: id_order, ProductIdProducto: product.id_producto },
+      defaults: { quantity, price: product.price * quantity },
+    });
+    if (!created) {
+      newOrder.quantity += quantity;
+      newOrder.price += product.price * quantity;
+      await newOrder.save();
+    }
 
     if (!order) {
       return res.status(404).json({ message: "Pedido no encontrado" });
-    }
-
-    if (status) {
-      order.status = status;
-    }
-
-    if (package) {
-      order.package = package;
     }
 
     await order.save();
