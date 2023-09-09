@@ -16,6 +16,6 @@ orderRouter.get("/:id_order", getOrderById);
 orderRouter.post("/", createOrder);
 orderRouter.put("/update", updateOrder);
 orderRouter.delete("/:id_order", deleteOrder);
-orderRouter.put("/payment-success", paymentSuccess);
+orderRouter.put("/payment-success", verifyToken, paymentSuccess);
 
 module.exports = orderRouter;

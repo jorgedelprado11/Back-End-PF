@@ -1,7 +1,7 @@
 const paymentSuccessController = require("../../Controllers/Order/paymentSuccessController");
 
 const paymentSuccess = async (req, res) => {
-  const { id_user } = req.user;
+  const id_user = req.user.id;
   try {
     const order = await paymentSuccessController(id_user);
     if (order) {
@@ -14,6 +14,10 @@ const paymentSuccess = async (req, res) => {
         message: "Order not found",
       });
     }
-  } catch (error) {}
+  } catch (error) {
+    res.status(500).json({
+      message: error.message,
+    });
+  }
 };
 module.exports = paymentSuccess;
