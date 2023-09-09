@@ -18,6 +18,7 @@ class Order extends Crud {
         price: {
           type: DataTypes.FLOAT,
           allowNull: false,
+          defaultValue: 0,
         },
       })
     );

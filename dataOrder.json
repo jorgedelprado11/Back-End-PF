@@ -1,7 +1,7 @@
 [
   {
-    "id_order": 6,
-    "status": "Pending",
+    "id_order": 1,
+    "status": "cart",
     "id_user": 1,
     "package": {
       "items": [
@@ -18,7 +18,7 @@
   },
   {
     "id_order": 2,
-    "status": "Shipped",
+    "status": "cart",
     "id_user": 2,
     "package": {
       "items": [
@@ -36,7 +36,7 @@
   },
   {
     "id_order": 3,
-    "status": "Delivered",
+    "status": "cart",
     "id_user": 3,
     "package": {
       "items": [
@@ -50,7 +50,7 @@
   },
   {
     "id_order": 4,
-    "status": "Pending",
+    "status": "cart",
     "id_user": 4,
     "package": {
       "items": [
@@ -68,13 +68,27 @@
   },
   {
     "id_order": 5,
-    "status": "Cancelled",
+    "status": "cart",
     "id_user": 5,
     "package": {
       "items": [
         {
           "id_producto": "10",
           "cantidad": 1
+        }
+      ],
+      "total_price": 10.0
+    }
+  },
+  {
+    "id_order": 6,
+    "status": "finished",
+    "id_user": 5,
+    "package": {
+      "items": [
+        {
+          "id_producto": "9",
+          "cantidad": 2
         }
       ],
       "total_price": 10.0
