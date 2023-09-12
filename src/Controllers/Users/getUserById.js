@@ -1,4 +1,5 @@
-const { Users, Role, Location } = require("../../db");
+
+const { Users, Role, Location, Order } = require("../../db");
 
 const getUserById = async (req, res) => {
   try {
@@ -15,8 +16,10 @@ const getUserById = async (req, res) => {
           model: Location,
           attributes: ["provincia", "ciudad", "calle", "codigo_postal"],
         },
+
       ],
     });
+
     if (!user) {
       return res.status(404).json({ user });
     }

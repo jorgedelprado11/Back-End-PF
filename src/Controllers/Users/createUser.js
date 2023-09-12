@@ -2,7 +2,7 @@ const { Users } = require("../../db");
 
 const createUser = async (req, res) => {
   try {
-    const {  username, email, password, firstName, lastName, phoneNumber } =
+    const { username, email, password, firstName, lastName, phoneNumber } =
       req.body;
 
     if (
@@ -16,13 +16,17 @@ const createUser = async (req, res) => {
       return res.status(400).json({ message: "Missing required fields" });
     }
 
-    const newUser = await Users.create({
-      username,
-      email,
-      password,
-      firstName,
-      lastName,
-      phoneNumber,
+    const [newUser, created] = await Users.findOrCreate({
+      where: {
+        email,
+      },
+      defaults: {
+        username,
+        password,
+        firstName,
+        lastName,
+        phoneNumber,
+      },
     });
 
     if (!newUser) throw Error("Users Not Found");
