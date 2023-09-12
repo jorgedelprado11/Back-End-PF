@@ -1,3 +1,4 @@
+
 const { Users, Role, Location, Order } = require("../../db");
 
 const getUserById = async (req, res) => {
@@ -11,7 +12,11 @@ const getUserById = async (req, res) => {
       where: { id },
       include: [
         { model: Role, attributes: ["description"] },
-        { model: Location }
+        {
+          model: Location,
+          attributes: ["provincia", "ciudad", "calle", "codigo_postal"],
+        },
+
       ],
     });
 
