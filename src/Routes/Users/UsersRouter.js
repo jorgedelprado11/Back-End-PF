@@ -15,7 +15,7 @@ const restoreUser = require("../../Controllers/Users/restoreUser");
 
 usersRouter.get("/eliminados", getEliminatedUsers);
 
-usersRouter.post("/:id", restoreUser);
+usersRouter.post("/restore-user/:id", restoreUser);
 
 usersRouter.post("/login", loginHandler); // ? OK
 
