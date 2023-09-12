@@ -13,7 +13,7 @@ const loginHandler = require("../../Handlers/User/loginHandler");
 
 usersRouter.post("/login", loginHandler); // ? OK
 
-usersRouter.get("/", getAllUsers); // ? OK
+usersRouter.get("/", verifyAdmin, getAllUsers); // ? OK
 
 usersRouter.post("/createUser", createUser); // ? OK
 
