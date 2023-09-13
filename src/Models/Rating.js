@@ -16,18 +16,6 @@ class Rating extends Crud {
             type: DataTypes.INTEGER,
             // allowNull: false,
           },
-          // * Probando si hacen falta, creo que no
-
-
-
-          // id_producto: {
-          //   type: DataTypes.INTEGER,
-          //   allowNull: false,
-          // },
-          // id_user: {
-          //   type: DataTypes.INTEGER,
-          //   allowNull: false,
-          // },
         },
 
         {

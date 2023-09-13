@@ -20,7 +20,6 @@ ratingRouter.get("/:id_producto/low", getLowRatings);
 
 ratingRouter.delete("/:id_user/:id_producto/delete", deleteRating);
 
-// ?
 ratingRouter.put("/:id_rating/update", updateProductRating);
 
 module.exports = ratingRouter;
