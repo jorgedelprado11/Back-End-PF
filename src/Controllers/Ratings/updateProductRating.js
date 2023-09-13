@@ -1,33 +1,34 @@
 const { Rating, Products } = require("../../db");
 
-// Controlador para obtener todos los ratings de un producto particular y calcular el promedio
-const updateProductRating = async (req, res) => {
+// Controlador para actualizar el valor de un Rating y la calificación de un Producto
+const updateRatingValue = async (req, res) => {
   try {
-    const { id_producto } = req.params;
+    const { id_rating } = req.params;
+    const { value } = req.body;
 
-    // Buscar todos los ratings para un producto particular
-    const ratings = await Rating.findAll({
-      where: { id_producto },
-    });
+    // Buscar el Rating por su ID
+    const rating = await Rating.findByPk(id_rating);
 
-    // Calcular el promedio de los valores (values)
-    let totalValue = 0;
-    for (const rating of ratings) {
-      totalValue += rating.value;
+    if (!rating) {
+      return res.status(404).json({ error: "Rating no encontrado" });
     }
-    const averageValue = ratings.length > 0 ? totalValue / ratings.length : 0;
 
-    // Actualizar la propiedad 'calificacion' del producto con el valor promedio
-    await Products.update(
-      { calificacion: averageValue },
-      { where: { id_producto } }
-    );
+    // Actualizar el valor del Rating
+    rating.value = value;
+    await rating.save();
 
-    res.status(200).json({ ratings, averageValue });
+    // Actualizar la calificación del Producto con el nuevo valor
+    const product = await Products.findByPk(rating.id_producto);
+    if (product) {
+      product.calificacion = value;
+      await product.save();
+    }
+
+    res.status(200).json({ rating, product });
   } catch (error) {
-    console.error("Error al obtener los ratings del producto:", error);
+    console.error("Error al actualizar el valor del Rating:", error);
     res.status(500).json({ error: "Error interno del servidor" });
   }
 };
 
-module.exports = updateProductRating;
+module.exports = updateRatingValue;

@@ -39,7 +39,7 @@ const createRating = async (req, res) => {
       { where: { id_producto } }
     );
 
-    res.status(201).json({ ratings, newRating, promedio: averageValue });
+    res.status(201).json({ newRating, promedio: averageValue });
   } catch (error) {
     console.error("Error al crear el rating:", error);
     res.status(500).json({ error: "Error interno del servidor" });

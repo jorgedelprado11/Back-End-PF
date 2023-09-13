@@ -26,7 +26,7 @@ const deleteRating = async (req, res) => {
     // Eliminar la calificación
     await ratingToDelete.destroy();
 
-    res.status(204).send("Calificación eliminada exitosamente"); // Respuesta exitosa sin contenido
+    res.status(204).send();
   } catch (error) {
     console.error("Error al eliminar la calificación:", error);
     res.status(500).json({ error: "Error interno del servidor" });
