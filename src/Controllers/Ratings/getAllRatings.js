@@ -4,7 +4,7 @@ const getAllRatings = async (req, res) => {
   try {
     const ratings = await Rating.findAll();
 
-    console.log(ratings);
+    // console.log(ratings);
 
     if (!ratings) throw Error("Ratings Not Found");
 
