@@ -82,10 +82,10 @@ const DB_connect = async () => {
           value,
         },
       });
-      console.log(id_rating);
-      console.log(value);
-      console.log(id_producto);
-      console.log(id_user);
+      // console.log(id_rating);
+      // console.log(value);
+      // console.log(id_producto);
+      // console.log(id_user);
     }
 
     // Create or find macro categories

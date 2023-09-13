@@ -1,7 +1,7 @@
-const { Rating } = require("../../db");
+const { Rating, Products } = require("../../db");
 
 // Controlador para obtener todos los ratings de un producto particular y calcular el promedio
-const getAllRatingsOfOneProduct = async (req, res) => {
+const updateProductRating = async (req, res) => {
   try {
     const { id_producto } = req.params;
 
@@ -17,6 +17,12 @@ const getAllRatingsOfOneProduct = async (req, res) => {
     }
     const averageValue = ratings.length > 0 ? totalValue / ratings.length : 0;
 
+    // Actualizar la propiedad 'calificacion' del producto con el valor promedio
+    await Products.update(
+      { calificacion: averageValue },
+      { where: { id_producto } }
+    );
+
     res.status(200).json({ ratings, averageValue });
   } catch (error) {
     console.error("Error al obtener los ratings del producto:", error);
@@ -24,38 +30,4 @@ const getAllRatingsOfOneProduct = async (req, res) => {
   }
 };
 
-module.exports = getAllRatingsOfOneProduct;
-
-
-// ! RUTA
-
-// * GET      http://localhost:3001/ratings/124/rating
-
-
-// ! COMO LLEGA LA INFO
-
-// {
-// 	"ratings": [
-// 		{
-// 			"id_rating": 5,
-// 			"value": 1,
-// 			"id_producto": 124,
-// 			"id_user": 1
-// 		},
-// 		{
-// 			"id_rating": 6,
-// 			"value": 2,
-// 			"id_producto": 124,
-// 			"id_user": 2
-// 		},
-// 		{
-// 			"id_rating": 7,
-// 			"value": 5,
-// 			"id_producto": 124,
-// 			"id_user": 3
-// 		}
-// 	],
-// 	"averageValue": 2.6666666666666665
-// }
-
-
+module.exports = updateProductRating;
