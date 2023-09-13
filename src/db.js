@@ -85,7 +85,14 @@ const {
   Order,
   OrderProduct,
   Comments,
+  Rating,
 } = sequelize.models;
+
+Rating.belongsTo(Products, { foreignKey: "id_producto" });
+Products.hasMany(Rating, { foreignKey: "id_producto" });
+
+Rating.belongsTo(Users, { foreignKey: "id_user" });
+Users.hasMany(Rating, { foreignKey: "id_user" });
 
 Categories.hasMany(Products, { foreignKey: "id_categoria" });
 Products.belongsTo(Categories, { foreignKey: "id_categoria" });

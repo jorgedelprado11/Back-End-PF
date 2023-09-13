@@ -13,6 +13,7 @@ class Product extends Crud {
             allowNull: false,
             autoIncrement: true,
           },
+  
           nombre: {
             type: DataTypes.STRING,
             allowNull: false,

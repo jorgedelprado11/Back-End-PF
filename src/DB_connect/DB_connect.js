@@ -13,6 +13,7 @@ const {
   Order,
   OrderProduct,
   Comments,
+  Rating,
 } = require("../db");
 const { v4: uuidv4 } = require("uuid");
 const path = require("path");
@@ -59,9 +60,32 @@ const DB_connect = async () => {
     const commentsRawData = fs.readFileSync(commentsFilePath);
     const commentsData = JSON.parse(commentsRawData);
 
+    const ratingsFilePath = path.join(__dirname, "../../dataRatings.json");
+    const ratingsRawData = fs.readFileSync(ratingsFilePath);
+    const ratingsData = JSON.parse(ratingsRawData);
+
     if (!productData.results || !categoryData) {
       console.log("No results found in the data.");
       return;
+    }
+
+    // Create or find ratings
+    console.log(ratingsData);
+    for (const ratingItem of ratingsData) {
+      const { id_rating, value, id_producto, id_user } = ratingItem;
+
+      await Rating.findOrCreate({
+        where: { id_rating },
+        defaults: {
+          id_producto,
+          id_user,
+          value,
+        },
+      });
+      console.log(id_rating);
+      console.log(value);
+      console.log(id_producto);
+      console.log(id_user);
     }
 
     // Create or find macro categories
