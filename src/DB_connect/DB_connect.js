@@ -70,7 +70,6 @@ const DB_connect = async () => {
     }
 
     // Create or find ratings
-    console.log(ratingsData);
     for (const ratingItem of ratingsData) {
       const { id_rating, value, id_producto, id_user } = ratingItem;
 
@@ -82,10 +81,6 @@ const DB_connect = async () => {
           value,
         },
       });
-      console.log(id_rating);
-      console.log(value);
-      console.log(id_producto);
-      console.log(id_user);
     }
 
     // Create or find macro categories

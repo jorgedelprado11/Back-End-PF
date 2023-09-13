@@ -1,8 +1,8 @@
 const { Order, Products } = require("../../db");
 
-const getOrderByStatus = async (id_user, status) => {
-  const order = await Order.findOne({
-    where: { id_user, status },
+const getOrderForUser = async (id_user) => {
+  const order = await Order.findAll({
+    where: { id_user },
     attributes: ["id_order", "status", "price", "updatedAt"],
     include: [
       { model: Products, attributes: ["id_producto", "nombre", "precio"] },
@@ -10,4 +10,4 @@ const getOrderByStatus = async (id_user, status) => {
   });
   return order;
 };
-module.exports = getOrderByStatus;
+module.exports = getOrderForUser;

@@ -8,6 +8,7 @@ const deleteOrder = require("../../Controllers/Order/deleteOrder");
 const verifyAdmin = require("../../Assessments/verifyAdmin");
 const verifyToken = require("../../Assessments/verifyToken");
 const paymentSuccess = require("../../Handlers/Order/putPaymentSuccess");
+const updateOrderStatus = require("../../Handlers/Order/updateStatus");
 
 // ! AGREGAR verifyToken
 orderRouter.get("/", getAllOrder);
@@ -15,6 +16,7 @@ orderRouter.get("/", getAllOrder);
 orderRouter.get("/:id_order", getOrderById);
 orderRouter.post("/", createOrder);
 orderRouter.put("/update", updateOrder);
+orderRouter.put("/update/status", updateOrderStatus);
 orderRouter.delete("/:id_order", deleteOrder);
 orderRouter.put("/payment-success", verifyToken, paymentSuccess);
 
