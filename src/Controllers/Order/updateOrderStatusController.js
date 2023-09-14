@@ -16,7 +16,6 @@ const updateOrderStatusController = async (id_order, status) => {
         { model: Products, attributes: ["id_producto", "nombre", "precio"] },
       ],
     });
-    console.log(orderUpdated);
     return order;
   } catch (error) {
     console.error(error.message);
