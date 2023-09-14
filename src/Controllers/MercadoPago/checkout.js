@@ -1,4 +1,6 @@
 const mercadopago = require("mercadopago");
+const { or } = require("sequelize");
+const { Order, Products } = require("../../db.js");
 require("dotenv").config();
 const { PROD_ACCESS_TOKEN } = process.env;
 
@@ -7,14 +9,20 @@ mercadopago.configure({
   access_token: PROD_ACCESS_TOKEN,
 });
 
-const checkoutController = async (products) => {
+const checkoutController = async (id_user) => {
+  const { dataValues } = await Order.findOne({
+    where: { id_user, status: "cart" },
+    attributes: [],
+    include: [{ model: Products }],
+  });
+  const products = dataValues.Products;
   const preference = {
     items: products.map((product) => {
       return {
-        title: product.name,
-        unit_price: product.price,
-        quantity: product.quantity,
-        description: product.description,
+        title: product.nombre,
+        unit_price: product.precio,
+        quantity: product.OrderProduct.quantity,
+        description: product.nombre,
       };
     }),
     back_urls: {

@@ -1,9 +1,9 @@
 const checkoutController = require("../../Controllers/MercadoPago/checkout");
 
 const checkoutHandler = async (req, res, next) => {
-  const { products } = req.body;
+  const id_user = req.user.id;
   try {
-    const init_point = await checkoutController(products);
+    const init_point = await checkoutController(id_user);
     if (!init_point) {
       return res.status(400).json({ message: "Error al crear el checkout" });
     }

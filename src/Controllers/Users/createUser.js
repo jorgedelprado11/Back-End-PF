@@ -1,4 +1,4 @@
-const { Users } = require("../../db");
+const { Users, Order } = require("../../db");
 
 const createUser = async (req, res) => {
   try {
@@ -28,6 +28,10 @@ const createUser = async (req, res) => {
         phoneNumber,
       },
     });
+    if (created) {
+      const id_user = newUser.id;
+      await Order.create({ id_user, status: "cart" });
+    }
 
     if (!newUser) throw Error("Users Not Found");
 

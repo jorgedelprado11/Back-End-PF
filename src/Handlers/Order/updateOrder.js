@@ -1,8 +1,11 @@
+const getCartForUser = require("../../Controllers/Order/getCartForUser");
 const updateOrderController = require("../../Controllers/Order/updateOrderController");
 
 const updateOrder = async (req, res) => {
   try {
-    const { id_producto, quantity, id_order } = req.body;
+    const { id_producto, quantity, id_user } = req.body;
+    // const id_user = req.user.id;
+    const { id_order } = await getCartForUser(id_user);
     const orderUpdated = await updateOrderController(
       id_producto,
       quantity,
