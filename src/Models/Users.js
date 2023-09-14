@@ -28,7 +28,7 @@ class User extends Crud {
           },
           username: {
             type: DataTypes.STRING,
-            allowNull: false,
+            // allowNull: false,
           },
           email: {
             type: DataTypes.STRING,
