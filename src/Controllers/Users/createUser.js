@@ -1,4 +1,5 @@
 const { Users, Order } = require("../../db");
+const createCartForUser = require("../Order/createCartForUser");
 
 const createUser = async (req, res) => {
   try {
@@ -38,14 +39,14 @@ const createUser = async (req, res) => {
     });
     if (created) {
       const id_user = newUser.id;
-      await Order.create({ id_user, status: "cart" });
+      await createCartForUser(id_user);
     }
 
     if (!newUser) throw Error("Users Not Found");
 
     return res.status(200).json(newUser);
   } catch (error) {
-    return res.status(500).json({ message: error });
+    return res.status(500).json({ error });
   }
 };
 
