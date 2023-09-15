@@ -2,8 +2,15 @@ const { Users, Order } = require("../../db");
 
 const createUser = async (req, res) => {
   try {
-    const { username, email, password, firstName, lastName, phoneNumber } =
-      req.body;
+    const {
+      username,
+      email,
+      password,
+      firstName,
+      lastName,
+      phoneNumber,
+      id_role,
+    } = req.body;
 
     if (
       !username ||
@@ -26,6 +33,7 @@ const createUser = async (req, res) => {
         firstName,
         lastName,
         phoneNumber,
+        id_role: id_role || 2,
       },
     });
     if (created) {

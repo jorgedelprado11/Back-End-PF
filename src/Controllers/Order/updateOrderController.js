@@ -1,4 +1,4 @@
-const { Order, OrderProduct, Products } = require("../../db");
+const { Order, OrderProduct, Products, Images } = require("../../db");
 
 const updateOrderController = async (id_producto, quantity, id_order) => {
   try {
@@ -13,10 +13,14 @@ const updateOrderController = async (id_producto, quantity, id_order) => {
     if (!orderProduct) {
       return;
     } else if (quantity === 0) {
-      await orderProduct.destroy();
+      await OrderProduct.destroy({
+        where: {
+          OrderIdOrder: id_order,
+          ProductIdProducto: product.id_producto,
+        },
+      });
       return;
     } else if (!created) {
-      console.log("no created");
       orderProduct.quantity = quantity;
       orderProduct.price = product.precio * quantity;
       await orderProduct.save();
@@ -25,10 +29,18 @@ const updateOrderController = async (id_producto, quantity, id_order) => {
     const orderUpdated = await Order.findByPk(id_order, {
       attributes: ["id_order", "status", "price", "updatedAt"],
       include: [
-        { model: Products, attributes: ["id_producto", "nombre", "precio"] },
+        {
+          model: Products,
+          attributes: ["id_producto", "nombre", "precio", "stock"],
+          include: [{ model: Images /*through: { attributes: ["url"] }*/ }],
+        },
       ],
     });
-    console.log("orderUpdated", orderUpdated);
+    orderUpdated.price = orderUpdated.Products.reduce(
+      (acc, product) => acc + product.OrderProduct.price,
+      0
+    );
+    await orderUpdated.save();
     return orderUpdated;
   } catch (error) {}
 };
