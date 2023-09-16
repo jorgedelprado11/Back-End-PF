@@ -1,4 +1,5 @@
 const { Order, Products } = require("../../db");
+const createCartForUser = require("./createCartForUser");
 
 const paymentSuccessController = async (id_user) => {
   const order = await Order.findOne({
@@ -9,7 +10,7 @@ const paymentSuccessController = async (id_user) => {
   });
   order.status = "in-process";
   await order.save();
-  await Order.create({ id_user, status: "cart" });
+  await createCartForUser(id_user);
   return order;
 };
 module.exports = paymentSuccessController;
