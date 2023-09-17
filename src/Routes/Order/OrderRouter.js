@@ -10,6 +10,7 @@ const verifyToken = require("../../Assessments/verifyToken");
 const paymentSuccess = require("../../Handlers/Order/putPaymentSuccess");
 const updateOrderStatus = require("../../Handlers/Order/updateStatus");
 const deleteProduct = require("../../Handlers/Order/deleteProduct");
+const getCartForUserHandler = require("../../Handlers/Order/getCartForUserHandler");
 
 // ! AGREGAR verifyToken
 orderRouter.get("/", getAllOrder);
@@ -21,5 +22,6 @@ orderRouter.put("/update/status", updateOrderStatus);
 orderRouter.delete("/delete-product", deleteProduct);
 orderRouter.delete("/:id_order", deleteOrder);
 orderRouter.put("/payment-success", verifyToken, paymentSuccess);
+orderRouter.get("/get-cart", verifyToken, getCartForUserHandler);
 
 module.exports = orderRouter;

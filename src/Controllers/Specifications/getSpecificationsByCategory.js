@@ -1,10 +1,15 @@
-const { specificationModel, Specification, Categories, SpecificationValue } = require("../../db");
+const {
+  specificationModel,
+  Specification,
+  Categories,
+  SpecificationValue,
+} = require("../../db");
 
 const getSpecsByCategoryController = async (id) => {
   const specs = await Specification.findAll({
     include: [
       { model: Categories, where: { id_categoria: id }, attributes: [] },
-      { model: SpecificationValue, attributes: ['value'] }
+      { model: SpecificationValue, attributes: ["value", "id"] },
     ],
   });
   return specs;

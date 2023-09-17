@@ -12,8 +12,8 @@ locationRouter.get("/", (req, res) => {
   const { provincia } = req.query;
   !provincia ? getAllLocations(req, res) : getLocationByProvincia(req, res);
 });
+locationRouter.get("/user/:id", getLocationOfOneUser);
 locationRouter.get("/:id_location", getLocationById);
-locationRouter.get("/:id/user", getLocationOfOneUser);
 locationRouter.put("/:id_location", updateLocation);
 locationRouter.post("/createLocation", verifyToken, asignLocation);
 
