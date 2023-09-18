@@ -1,4 +1,5 @@
-const { Users, Role } = require("../../db");
+
+const { Users, Role, Location, Order } = require("../../db");
 
 const getUserById = async (req, res) => {
   try {
@@ -9,8 +10,16 @@ const getUserById = async (req, res) => {
 
     const user = await Users.findOne({
       where: { id },
-      include: [{ model: Role, attributes: ["description"] }],
+      include: [
+        { model: Role, attributes: ["description"] },
+        {
+          model: Location,
+          attributes: ["provincia", "ciudad", "calle", "codigo_postal"],
+        },
+
+      ],
     });
+
     if (!user) {
       return res.status(404).json({ user });
     }

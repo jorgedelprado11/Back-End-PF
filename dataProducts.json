@@ -747,10 +747,10 @@
       ],
       "caracteristicas": {
         "modelo": "Ryzen 3 3200G",
-        "familia": "AMD RYZEN 3",
         "socket": "AM4 APU 3th Gen",
         "nucleos": 4,
         "frecuencia": "3600.00 mhz",
+        "familia": "AMD RYZEN 3",
         "cooler": true,
         "cache": true
       }

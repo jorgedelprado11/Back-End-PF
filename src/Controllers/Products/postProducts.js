@@ -1,4 +1,9 @@
-const { Products, Images, Specification, SpecificationValue } = require("../../db");
+const {
+  Products,
+  Images,
+  Specification,
+  SpecificationValue,
+} = require("../../db");
 
 const postProducts = async (req, res) => {
   try {
@@ -10,7 +15,7 @@ const postProducts = async (req, res) => {
       stock,
       id_categoria,
       imagen,
-      SpecificationValues
+      specificationValues,
     } = req.body;
 
     if (
@@ -34,26 +39,28 @@ const postProducts = async (req, res) => {
       id_categoria,
     });
 
-    if (SpecificationValues && Array.isArray(SpecificationValues)) {
-      for (const spec of SpecificationValues) {
-        const specification = await Specification.findOne({
-          where: {
-            name: spec.Specification.name
-          }
-        })
-        if (specification) {
-          const specificationValue = await SpecificationValue.findOne({
-            where: {
-              value: spec.value,
-              id: specification.id_specification
-            }
-          })
-        if (specificationValue) {
-          await newProduct.addSpecificationValue(specificationValue)
-        }
-        }
-      }
-    }
+    await newProduct.addSpecificationValue(specificationValues);
+
+    // if (SpecificationValues && Array.isArray(SpecificationValues)) {
+    //   for (const spec of SpecificationValues) {
+    //     const specification = await Specification.findOne({
+    //       where: {
+    //         name: spec.Specification.name
+    //       }
+    //     })
+    //     if (specification) {
+    //       const specificationValue = await SpecificationValue.findOne({
+    //         where: {
+    //           value: spec.value,
+    //           id: specification.id_specification
+    //         }
+    //       })
+    //     if (specificationValue) {
+    //       await newProduct.addSpecificationValue(specificationValue)
+    //     }
+    //     }
+    //   }
+    // }
 
     await Images.findOrCreate({
       where: {
@@ -69,14 +76,6 @@ const postProducts = async (req, res) => {
 };
 
 module.exports = postProducts;
-
-
-
-
-
-
-
-
 
 // {
 //   "nombre": "Nuevo Monitor",
@@ -125,27 +124,6 @@ module.exports = postProducts;
 //     }
 //   ]
 // }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // const { Products, Images } = require("../../db");
 
