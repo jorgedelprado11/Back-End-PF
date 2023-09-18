@@ -26,6 +26,11 @@ const updateOrderController = async (id_producto, quantity, id_order) => {
       await orderProduct.save();
       console.log(orderProduct.dataValues);
     }
+
+    const newStock = product.stock - quantity;
+    product.stock = newStock;
+    await product.save();
+    
     const orderUpdated = await Order.findByPk(id_order, {
       attributes: ["id_order", "status", "price", "updatedAt"],
       include: [
