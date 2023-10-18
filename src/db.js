@@ -12,7 +12,13 @@ require("dotenv").config();
 const { Sequelize } = require("sequelize");
 const fs = require("fs");
 const path = require("path");
-const { POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_HOST, POSTGRES_DATABASE, POSTGRES_URL } = process.env;
+const {
+  POSTGRES_USER,
+  POSTGRES_PASSWORD,
+  POSTGRES_HOST,
+  POSTGRES_DATABASE,
+  POSTGRES_URL,
+} = process.env;
 
 /*
 * Creo la instancia de la clase Sequelize para utilizar opciones como loggin false que se utiliza para desactivar el registro de consultas
@@ -34,10 +40,13 @@ const { POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_HOST, POSTGRES_DATABASE, POST
 // );
 
 //*Postgress Deploy
-const sequelize = new Sequelize(POSTGRES_URL, {
-  logging: false,
-  native: false,
-});
+const sequelize = new Sequelize(
+  "postgres://default:wBoG1pk2TKui@ep-tight-credit-91415914.us-east-1.postgres.vercel-storage.com:5432/verceldb",
+  {
+    logging: false,
+    native: false,
+  }
+);
 const basename = path.basename(__filename);
 
 /*
